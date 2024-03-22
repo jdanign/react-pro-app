@@ -1,3 +1,6 @@
+/**
+ * Componente con la exportación por defecto para la carga con lazyload.
+ */
 export const LazyPage3 = ()=>{
     return (
         <>
@@ -5,3 +8,5 @@ export const LazyPage3 = ()=>{
         </>
     )
 }
+
+export default LazyPage3;
