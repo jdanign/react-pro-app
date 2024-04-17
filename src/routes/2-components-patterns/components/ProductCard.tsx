@@ -16,7 +16,7 @@ const {Provider} = ProductContext;
 
 
 /**
- * Patron de diseño: Compound Component Pattern.
+ * Patron de diseño Compound Component Pattern:
  * Este componente puede compartir estado entre componentes 
  * hijos, sin tener que pasar props explícitamente a través 
  * de cada nivel del árbol de componentes.
@@ -24,8 +24,12 @@ const {Provider} = ProductContext;
  * del useContext en los componentes hijos.
  * Este componente puede llamar a sus componentes hijos como propiedades del mismo,
  * las propiedades  se establecen en el propio index.ts
+ * 
+ * Patrón de diseño Extensible Styles:
+ * Recibe la prop className para añadirla a las clases que ya tenga el propio componente.
+ * Recibe la prop style para añadirla a los estilos que ya tenga el propio componente.
  */
-export const ProductCard = ({children, product}:ProductCardProps)=>{
+export const ProductCard = ({children, product, className='', style}:ProductCardProps)=>{
     const {counter, increaseBy} = useProduct(0);
 
 
@@ -35,7 +39,7 @@ export const ProductCard = ({children, product}:ProductCardProps)=>{
                 product, counter, increaseBy
             }}
         >
-            <div className={styles.productCard}>
+            <div className={`${styles.productCard} ${className}`} style={style}>
                 {children}
             </div>
         </Provider>

@@ -6,7 +6,7 @@ import { ProductImage } from './'
 import { ProductTitle } from './'
 
 /**
- * Asigna otros componentes como sus propiedades.
+ * Asigna otros componentes como propiedades del componente padre.
  */
 export const ProductCard: ProductCardHocProps = Object.assign(ProductCardHoc, {
     Title: ProductTitle,
