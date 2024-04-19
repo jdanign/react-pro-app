@@ -14,27 +14,7 @@ export const useShoppingCart = ()=>{
 
     const onProductCountChange = ({count, product}:ProductCardOnChangeArgs)=>{
         setShoppingCart(prevState => {
-            const productInCart: ProductInCart = prevState[product.id] || {...product, count: 0};
-
-            // Inserta o modifica el producto
-            if (Math.max(productInCart.count + count, 0) > 0){
-                productInCart.count += count;
-
-                return {
-                    ...prevState,
-                    [product.id]: productInCart
-                }
-            }
-            // Borra el producto
-            else {
-                const {[product.id]: current, ...rest} = prevState;
-
-                return rest;
-            }
-
-
-
-            /* // Desestructura y separa el producto actual del resto de productos
+            // Desestructura y separa el producto actual del resto de productos
             const {[product.id]: current, ...rest} = prevState;
 
             // Si el contador se pone en 0 solo se devuelve el resto de elementos, 
@@ -46,7 +26,7 @@ export const useShoppingCart = ()=>{
                     ...rest,
                     [product.id]: {...product, count}
                 }
-            ); */
+            );
         })
     }
 
