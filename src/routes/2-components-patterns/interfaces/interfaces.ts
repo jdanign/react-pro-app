@@ -14,25 +14,47 @@ export interface ProductInCart extends Product {
     count: number,
 }
 
+/** Tipado para el atributo de los valores iniciales del 'ProductCard' */
+export interface InitialValues {
+    count?: number,
+    maxCount?: number,
+}
 
-/** Interfaz para los productos dentro del carrito */
-export type ProductCardOnChangeArgs = {
+/** Interfaz que establece el producto y su contador. */
+export interface ProductCard {
     product: Product,
     count: number,
 }
 
+/** Interfaz para los productos dentro del carrito */
+export interface ProductCardOnChangeArgs extends ProductCard {}
+
+/** Interfaz para manejar la función del children del ProductCard. */
+export interface ProductCardHandlers extends ProductCard {
+    isMaxCountReached: boolean,
+    maxCount?: number,
+    increaseBy: (value:number)=> void;
+    reset: ()=> void,
+}
+
+
+/** Tipado para las props del componente 'ProductCard' */
 export type ProductCardProps = {
     product: Product,
-    children?: ReactElement | ReactElement[], // Puede existir o no y puede ser un componente o varios
+    //children?: ReactElement | ReactElement[], // Puede existir o no y puede ser un componente o varios
+    children: (arg:ProductCardHandlers)=> JSX.Element, // Puede existir o no y puede ser un componente o varios
     className?: string,
     style?: CSSProperties | undefined,
     onChange?: (args:ProductCardOnChangeArgs)=> void,
     value?: number,
+    initialValues?: InitialValues,
 }
 
+/** Tipado para crear el contexto del Provider de un producto  */
 export type ProductContextProps = {
     product: Product,
     counter: number, 
+    maxCount?: number,
     increaseBy: (value: number) => void
 }
 

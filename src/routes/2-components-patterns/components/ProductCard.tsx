@@ -29,22 +29,28 @@ const {Provider} = ProductContext;
  * Recibe la prop className para añadirla a las clases que ya tenga el propio componente.
  * Recibe la prop style para añadirla a los estilos que ya tenga el propio componente.
  */
-export const ProductCard = ({children, product, className='', style, onChange, value=0}:ProductCardProps)=>{
-    const {counter, increaseBy} = useProduct({
+export const ProductCard = ({children, product, className='', style, onChange, value=0, initialValues}:ProductCardProps)=>{
+    const {counter, maxCount, isMaxCountReached, increaseBy, reset} = useProduct({
         product, 
+        value,
+        initialValues,
         onChange,
-        value
     });
 
 
     return (
         <Provider 
-            value={{
-                product, counter, increaseBy
-            }}
+            value={{product, counter, maxCount, increaseBy}}
         >
             <div className={`${styles.productCard} ${className}`} style={style}>
-                {children}
+                {children({
+                    count: counter,
+                    isMaxCountReached,
+                    maxCount: initialValues?.maxCount,
+                    product,
+                    increaseBy,
+                    reset,
+                })}
             </div>
         </Provider>
     )

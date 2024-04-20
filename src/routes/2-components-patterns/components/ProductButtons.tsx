@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useCallback, useContext } from "react";
 
 import { ProductButtonsProps } from "../interfaces";
 
@@ -8,7 +8,7 @@ import styles from '../styles/styles.module.css'
 
 
 const {
-    buttonsContainer, buttonMinus, buttonAdd, countLabel,
+    buttonsContainer, buttonMinus, buttonAdd, countLabel, disabled
 } = styles;
 
 
@@ -19,8 +19,15 @@ const {
  * Consume las propiedades del contexto generado en ProductContext.
  */
 export const ProductButtons = ({className='', style}:ProductButtonsProps)=>{
-    const {increaseBy, counter} = useContext(ProductContext);
+    const {counter, maxCount, increaseBy } = useContext(ProductContext);
 
+
+    /** Límite máximo alcanzado. */
+    const isMaxCheached = useCallback(
+        () => !!maxCount && counter === maxCount,
+        [counter, maxCount]
+    );
+    
 
     return (
         <div className={`${buttonsContainer} ${className}`} style={style}>
@@ -32,7 +39,7 @@ export const ProductButtons = ({className='', style}:ProductButtonsProps)=>{
             </button>
             <div className={countLabel}>{counter}</div>
             <button 
-                className={buttonAdd}
+                className={`${buttonAdd} ${isMaxCheached() ? disabled : ''}`}
                 onClick={()=>increaseBy(1)}
             >
                 +
