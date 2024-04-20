@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from "react";
 import { InitialValues, Product, ProductCardOnChangeArgs } from "../interfaces";
-import { count } from "console";
 
 
 
