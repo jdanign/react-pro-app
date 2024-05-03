@@ -1,13 +1,32 @@
+main {
+    margin-right: 15px;
+    margin-left: 15px;
+}
+
 form {
     display: flex;
     flex-direction: column;
     width: 400px;
+    background-color: #fff;
+    padding: 16px;
+    border-radius: 8px;
+}
+
+label {
+    color:black;
+}
+
+label:not(:first-child){
+    margin-top: 10px;
 }
 
 input, select {
-    margin-top: 5px;
     outline: none;
     padding: 10px;
+}
+
+input:not(:first-child), select:not(:first-child){
+    margin-top: 5px;
 }
 
 
